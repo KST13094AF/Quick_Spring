@@ -21,10 +21,17 @@ public class main {
 		
 		System.out.println("-------------------");
 		TV tv2 = (TV)fatory.getBean("tv2");
-		tv.powerOn();
-		tv.powerOff();
-		tv.volumUp();
-		tv.volumDown();
+		tv2.powerOn();
+		tv2.powerOff();
+		tv2.volumUp();
+		tv2.volumDown();
+		
+		System.out.println("-------------------");
+		TV tv3 = (TV)fatory.getBean("tv3");
+		tv3.powerOn();
+		tv3.powerOff();
+		tv3.volumUp();
+		tv3.volumDown();
 		
 		fatory.close();
 	}

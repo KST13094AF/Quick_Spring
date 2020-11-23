@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 <bean id="tv" class="Tv.SamsungTv" init-method="init" destroy-method="destroy">
@@ -14,9 +15,46 @@
 	<property name="price" value="200000"/>
 </bean>
 
+<bean id="tv3" class="Tv.SamsungTv" p:speaker-ref="sony" p:price="30000"/>
+
 <bean id="apple" class="Tv.AppleSpeaker"/>
 <bean id="sony" class="Tv.SonySpeaker"/>
 
+<bean id="CollectionBean" class="com.spring.ioc.injection.CollectionBean">
+	<property name="list">
+		<list>
+			<value>너무 어렵다 스프링</value>
+			<value>세터 인젝션 사용함</value>
+		</list>
+	</property>
+</bean>
+
+<bean id="CollectionSet"
+	class="com.spring.ioc.injection.CollectionBean_Set">
+	<property name="set">
+		<set>
+			<value>프레임워크 set setter 인젝션</value>
+			<value>set 연습</value>
+			<value>set 연습</value>
+		</set>
+	</property>
+</bean>
+
+<bean id="CollectionMap" class="com.spring.ioc.injection.CollectionMap">
+	<property name="map">
+		<map>
+			<entry>
+				<key><value>키1</value></key>
+				<value>값1</value>
+			</entry>
+			<entry>
+				<key><value>키2</value></key>
+				<value>값2</value>
+			</entry>
+		</map>
+	</property>
+</bean>
+ 
 </beans>
 <!-- Spring 설정 파일 new -> Other -> Spring.Spring Bean Configuration file 생성 -->
 
@@ -45,4 +83,20 @@
 	스프링 컨테이너가 자동으로 호출한다. 호출 시점은 bean 객체 생성 직후
 	Setter 인젝션이 동작하려면 반드시 기본 생성자가 필요함!ㅈ
 -->
+
+<!-- 
+	p: 네임스페이스
+	효율적 의존성 주입 처리 schemaLocation이 없음? 
+	p:변수명 - ref="참조할 객체 아이디" p:변수명="설정할 값"
+ -->
+ 
+ <!-- 
+ 	컬렉션 객체 설정: 컬렉션 객체 의존성 주입 
+ 	list = <list>
+ 	set = <set>
+ 	map = <map>
+ 	properties = <props>
+ 	
+ 	세터 인젝션을 사용해서 List 값을 초기화 함
+  -->
  
