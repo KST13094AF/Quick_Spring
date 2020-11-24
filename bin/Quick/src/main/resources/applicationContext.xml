@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<context:component-scan base-package="Tv"></context:component-scan>
+<!-- 
+	어노테이션 기반 설정
+	Context 네임스페이스: 루트 엘리먼트 beans에 네임스페이스와 스키마 문서 위치 등록
+	xmlns:context, xsi:schemalLocation 
+	
+	컴포턴트 스캔 설정
+	스프링 설정 파일에 bean을 동록하지 않고 자동 생성(스프링 컨테이너가 클래스 패스에 클래스들을 스캔하여 @component가 설정된 클래스들을 자동으로 객체에 할당)
+	context:component-scan을 제외한 나머지 bean 설정은 모두 삭제 or 주석 처리한다.
+
+ -->
+<bean id="tv" class="Tv.SamsungTv" init-method="init" destroy-method="destroy">
+	<constructor-arg index="0" ref="apple"></constructor-arg>
+	<constructor-arg index="1" value="20000"></constructor-arg>
+</bean>
+
+<!-- Setter 인젝션을 사용하려면 property 사용 -->
+<bean id="tv2" class="Tv.SamsungTv" init-method="init" destroy-method="destroy">
+	<property name="speaker" ref="sony"/>
+	<property name="price" value="200000"/>
+</bean>
+
+<bean id="tv3" class="Tv.SamsungTv" p:speaker-ref="sony" p:price="30000"/>
+
+<bean id="apple" class="Tv.AppleSpeaker"/>
+<bean id="sony" class="Tv.SonySpeaker"/>
+
+<bean id="CollectionBean" class="com.spring.ioc.injection.CollectionBean">
+	<property name="list">
+		<list>
+			<value>너무 어렵다 스프링</value>
+			<value>세터 인젝션 사용함</value>
+		</list>
+	</property>
+</bean>
+
+<bean id="CollectionSet"
+	class="com.spring.ioc.injection.CollectionBean_Set">
+	<property name="set">
+		<set>
+			<value>프레임워크 set setter 인젝션</value>
+			<value>set 연습</value>
+			<value>set 연습</value>
+		</set>
+	</property>
+</bean>
+
+<bean id="CollectionMap" class="com.spring.ioc.injection.CollectionMap">
+	<property name="map">
+		<map>
+			<entry>
+				<key><value>키1</value></key>
+				<value>값1</value>
+			</entry>
+			<entry>
+				<key><value>키2</value></key>
+				<value>값2</value>
+			</entry>
+		</map>
+	</property>
+</bean>
+ 
+</beans>
+<!-- Spring 설정 파일 new -> Other -> Spring.Spring Bean Configuration file 생성 -->
+
+<!--
+	즉시 로딩 방식: 컨테이너가 호출되면서 모든 객체 생성
+	스프링 기반 테스르 하기 위해 스프링 설정 파일에 클래스를 등록해야함 
+	클래스 당 빈 설정 하나 씩 
+	
+	<bean id="" class="" init-Method="" destroy-method="" lazy-init="" scope=""/>
+	id: Bean 객체를 호출(Lookup) 할 때 사용한다 유일해야함
+	class: 객체 생성할 class
+	init-Method: 호출 시 디폴트 생성자를 호출하는데 맴버 변수 초기화 작업이 필요할 경우 init 메소드 지정.
+	destroy-method: 스프링 컨테이너가 객체를 삭제하기 전에 호출될 메소드를 지정.
+	lazy-init: 즉시 로딩 방식 동작이 아닌 bean이 사용하는 시점에서 객체를 생성하도록 속성을 제공하여 메모리 관리 효율적
+	scope: 어느 범위에서 사용할 수 있는지 지정한다. default:singleton 스프링 컨테이너에 의해 객체 단 하나만 생성되어 운용한다. prototype: 요청 할 때 마다 새로운 객체 생성 값 
+-->
+
+<!-- 
+	사용자 인젝션: 매개변수를 가지는 생성자 호출 의존관계에 있는 객체의 주소를 전달한다.
+	사용자 인젝션 위해 bean에 등록한 객체를 생성자 인자로 전달한다.
+	<constructor-arg ref="bean id"/>
+-->
+ 
+ <!-- 
+ 	Setter 인젝션 
+	스프링 컨테이너가 자동으로 호출한다. 호출 시점은 bean 객체 생성 직후
+	Setter 인젝션이 동작하려면 반드시 기본 생성자가 필요함!ㅈ
+-->
+
+<!-- 
+	p: 네임스페이스
+	효율적 의존성 주입 처리 schemaLocation이 없음? 
+	p:변수명 - ref="참조할 객체 아이디" p:변수명="설정할 값"
+ -->
+ 
+ <!-- 
+ 	컬렉션 객체 설정: 컬렉션 객체 의존성 주입 
+ 	list = <list>
+ 	set = <set>
+ 	map = <map>
+ 	properties = <props>
+ 	
+ 	세터 인젝션을 사용해서 List 값을 초기화 함
+  -->
+ 
