@@ -33,6 +33,20 @@ public class main {
 		tv3.volumUp();
 		tv3.volumDown();
 		
+		System.out.println("-------------------");
+		TV tv4 = (TV)fatory.getBean("LgTv");
+		tv4.powerOn();
+		tv4.powerOff();
+		tv4.volumUp();
+		tv4.volumDown();
+		
+		System.out.println("-------------------");
+		TV tv5 = (TV)fatory.getBean("HansungTv");
+		tv5.powerOn();
+		tv5.powerOff();
+		tv5.volumUp();
+		tv5.volumDown();
+		
 		fatory.close();
 	}
 }

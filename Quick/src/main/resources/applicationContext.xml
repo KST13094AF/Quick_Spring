@@ -2,8 +2,21 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
+	<context:component-scan base-package="Tv"></context:component-scan>
+<!-- 
+	어노테이션 기반 설정
+	Context 네임스페이스: 루트 엘리먼트 beans에 네임스페이스와 스키마 문서 위치 등록
+	xmlns:context, xsi:schemalLocation 
+	
+	컴포턴트 스캔 설정
+	스프링 설정 파일에 bean을 동록하지 않고 자동 생성(스프링 컨테이너가 클래스 패스에 클래스들을 스캔하여 @component가 설정된 클래스들을 자동으로 객체에 할당)
+	context:component-scan을 제외한 나머지 bean 설정은 모두 삭제 or 주석 처리한다.
+
+ -->
 <bean id="tv" class="Tv.SamsungTv" init-method="init" destroy-method="destroy">
 	<constructor-arg index="0" ref="apple"></constructor-arg>
 	<constructor-arg index="1" value="20000"></constructor-arg>
