@@ -1,17 +1,16 @@
 package com.Quick.biz.common;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
 
 public class JDBCUtil {
 	
 	public static Connection getConnection() {
 		try {
-			Class.forName("");
-			return (Connection)DriverManager.getConnection("");
+			Class.forName("com.mysql.jdbc.Driver");
+			return (Connection)DriverManager.getConnection("jdbc:mysql://localhost/Quick","root","youngpoong20");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
