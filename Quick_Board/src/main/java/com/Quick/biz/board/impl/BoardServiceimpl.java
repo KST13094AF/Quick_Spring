@@ -8,10 +8,13 @@ import org.springframework.stereotype.Service;
 import com.Quick.biz.board.BoardDTO;
 
 @Service("boardService")
-public class BoardServiceImpl implements BoardService {
+public class BoardServiceimpl implements BoardService {
 
 	@Autowired
 	private BoardDAO bDAO;
+	
+	public BoardServiceimpl() {
+	}
 	
 	@Override
 	public void insertBoard(BoardDTO bDTO) {

@@ -3,8 +3,34 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+<!-- AOP 네임스페이스 추가 -->
+<!-- xmlns:aop="http~  -->
+<bean id="log" class="com.Quick.biz.common.LogAdvice"/>
+<aop:config>
+	<aop:pointcut id="allPointcut" expression="execution(* com.Quick.biz..*impl.*(..))"/>
+	<aop:pointcut id="getPointcut" expression="execution(* com.Quick.biz..*impl.get*(..))"/>
+	<aop:aspect ref="log">
+		<aop:after pointcut-ref="getPointcut" method="printLog"/>
+	</aop:aspect>
+</aop:config>
+
+<!-- 
+	AOP 용어
+	- 조인포인트: 클라이언트가 호출하는 모든 비즈니스 메소드 BoardServiceImpi and UserServiceImpi와 같이 클라이언트가 호출하는 메소드
+	- 포인트 컷: 필터링 된 조인포인트, ex) 트랙잭션과 같은 비즈니스 메소드에서 횡단 관심이 실행되야 하지만 검색와 같은 기능은 실행 될 필요가 없음 -> 원하는 메소드에만 횡단 관심 부여
+	
+	aop:poincut
+	id: 포인트컷을 식별하기 위한 문자열 선언
+	expression: *(리턴타입) com.Qick.biz(패키지 경로) *impl(클래스명) *(..)(메소드 및 매개변수)
+	
+	- 어드바이스: 횡단 관심의 공통 기능 코드를 의미, 비즈니스 로직 수행 후 트랙잭션 커밋 등, 독립된 클래스의 메소드로 작성됨
+	어드바이스의 동작 시점: before after after-returning after-throwing around 
+ -->
 
 <!-- BoardService 컴퓨넌트를 스프링 기반으로 테스트 하기 위해 context:component-scan 설정 수정 -->
 <context:component-scan base-package="com.Quick.biz"></context:component-scan>
