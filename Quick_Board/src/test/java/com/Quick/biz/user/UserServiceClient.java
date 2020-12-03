@@ -25,5 +25,4 @@ public class UserServiceClient {
 		
 		container.close();
 	}
-
 }
