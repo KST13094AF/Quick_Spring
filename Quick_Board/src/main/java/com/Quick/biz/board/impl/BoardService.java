@@ -15,5 +15,7 @@ public interface BoardService {
 	BoardDTO getBoard(BoardDTO bDTO);
 
 	List<BoardDTO> getBoardList(BoardDTO bDTO);
+	
+	//인터페이스
 
 }
