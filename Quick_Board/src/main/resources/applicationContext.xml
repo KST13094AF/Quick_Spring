@@ -14,6 +14,7 @@
 <aop:config>
 	<aop:pointcut id="allPointcut" expression="execution(* com.Quick.biz..*impl.*(..))"/>
 	<aop:pointcut id="getPointcut" expression="execution(* com.Quick.biz..*impl.get*(..))"/>
+	<aop:pointcut id="getPointcuts" expression="execution(* com.Quick.biz..*impl.get*(..))"/>
 	<aop:aspect ref="log">
 		<aop:after pointcut-ref="getPointcut" method="printLog"/>
 	</aop:aspect>
@@ -37,6 +38,18 @@
 	AOP(Aspect Oriented Programming)
 	- 에스팩트: 포인트 컷과 어드바이스를 결합 함으로 어떤 포인트 메소드에 어떤 어드바이스를 실행할 지 결정한다.
 	
+	<aop:config>는 AOP의 root 엘리먼트 이다.
+	하위 엘리먼트로 <aop:pointcut> <aop:aspect> 가 위치 한다.
+	
+	<aop:pointcut>
+	- 포인트 컷을 지정한다.
+	- <aop:config> , <aop:aspect>의 자식 엘리먼트로 사용핤 수 있다.
+	- 단 <aop:aspect>의 자식 엘리먼트인 경우 해당 <aop:aspect>에서만 사용이 가능하다.
+	- 여러 개 정의를 할 수 있으며, 유일한 아이디를 할당하여 애스팩트 설정 시 포인컷을 참조하는데 사용한다.
+	
+	<aop:aspect>
+	- 핵심 관심의 해당하는 포인트컷과 횡단 관심에 해당하는 어드바이스 메소드를 결합한다.
+	- 가장 중요한 설정이다(위빙의 결과를 반영)
  -->
 
 <!-- BoardService 컴퓨넌트를 스프링 기반으로 테스트 하기 위해 context:component-scan 설정 수정 -->
