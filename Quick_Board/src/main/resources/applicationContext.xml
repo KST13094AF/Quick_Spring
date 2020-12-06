@@ -25,18 +25,22 @@
 <bean id="afterReturning" class="com.Quick.biz.common.AfterReturningAdvice"/>
 <bean id="afterThrowing" class="com.Quick.biz.common.AfterThrowingAdvice"/>
 <bean id="after" class="com.Quick.biz.common.AfterAdvice"/>
+<bean id="around" class="com.Quick.biz.common.AroundAdvice"/>
 <aop:config>
 	<aop:aspect ref="before">
 		<aop:before pointcut-ref="allPointcut" method="BeforeLog"/>
 	</aop:aspect>
 	<aop:aspect ref="afterReturning">
-		<aop:after-returning pointcut-ref="allPointcut" method="afterLog"/>
+		<aop:after-returning pointcut-ref="allPointcut" method="afterLog" returning="returnObj"/> <!-- after-returning 에서만 사용할 수 있다. 리턴값을 바인딩하는 바인딩 매개변수 설정 -->
 	</aop:aspect>
 	<aop:aspect	ref="afterThrowing">
-		<aop:after-throwing pointcut-ref="allPointcut" method="afterThrowingLog"/>
+		<aop:after-throwing pointcut-ref="allPointcut" method="afterThrowingLog" throwing="exceptObj"/> <!-- after-throwing 에서만 사용 가능 발생한 예외의 값을 바인딩하는 변수를 설정 -->
 	</aop:aspect>
 	<aop:aspect ref="after">
 		<aop:after pointcut-ref="allPointcut" method="finallyLog"/>
+	</aop:aspect>
+	<aop:aspect ref="around">
+		<aop:around pointcut-ref="allPointcut" method="aroundLog"/>
 	</aop:aspect>
 </aop:config>
 

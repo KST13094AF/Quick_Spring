@@ -12,8 +12,8 @@ public class UserServiceClient {
 		UserService userService = (UserService) container.getBean("userService");
 		
 		UserDTO uDTO = new UserDTO();
-		uDTO.setId("id01");
-		uDTO.setPassword("pw01");
+		uDTO.setId("id02");
+		uDTO.setPassword("pw02");
 		
 		UserDTO user = userService.getUser(uDTO);
 		
