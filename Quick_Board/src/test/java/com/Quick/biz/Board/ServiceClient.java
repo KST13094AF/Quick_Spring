@@ -10,7 +10,7 @@ import com.Quick.biz.board.BoardDTO;
 import com.Quick.biz.board.impl.BoardService;
 
 public class ServiceClient {
-
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		AbstractApplicationContext cantainer = new GenericXmlApplicationContext("applicationContext.xml");
@@ -22,7 +22,7 @@ public class ServiceClient {
 		bDTO.setContent("테스트 내용 1");
 		bDTO.setWriter("유기현");
 		boardService.insertBoard(bDTO);
-		
+
 		List<BoardDTO> list = new ArrayList<BoardDTO>();
 		list = boardService.getBoardList(bDTO);
 		for(BoardDTO b : list) {
