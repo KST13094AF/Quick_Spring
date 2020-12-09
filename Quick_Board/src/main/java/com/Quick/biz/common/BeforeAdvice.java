@@ -1,7 +1,13 @@
 package com.Quick.biz.common;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Service;
 
+@Service
+@Aspect
 public class BeforeAdvice {
 	// <aop:before>
 	// joinPoint 인터페이스 
@@ -13,6 +19,11 @@ public class BeforeAdvice {
 	// getName() 클라이언트가 호출한 메소드 이름
 	// toLongString 클라이언트가 호출한 메소드 리턴, 이름, 매개변수를 패키지 경로까지 포함하여 리턴
 	// toShortString 클라이언트가 호출한 메소드 시그니처를 축약한 문자열로 리턴.
+	
+	@Pointcut("execution(* com.Quick.biz..*impl.*(..))")
+	public void allPointcut() {}
+	
+	@Before("allPoincut()")
 	public void BeforeLog(JoinPoint jp) {
 		String method = jp.getSignature().getName();
 		Object[] args = jp.getArgs();

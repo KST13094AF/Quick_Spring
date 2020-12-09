@@ -21,6 +21,7 @@
 </aop:config>
 
 <!-- aop 실행 순서  -->
+<!--  -->
 <bean id="before" class="com.Quick.biz.common.BeforeAdvice"/>
 <bean id="afterReturning" class="com.Quick.biz.common.AfterReturningAdvice"/>
 <bean id="afterThrowing" class="com.Quick.biz.common.AfterThrowingAdvice"/>
@@ -43,6 +44,13 @@
 		<aop:around pointcut-ref="allPointcut" method="aroundLog"/>
 	</aop:aspect>
 </aop:config>
+
+<aop:aspectj-autoproxy></aop:aspectj-autoproxy> 
+<!-- AOP를 에노테이션으로 사용하기 위해 설정한다. (관련 aop 에노테이션을 적절히 용도에 맞게 처리해준다)
+	에노테이션으로 aop를 사용하기 위해선 해당 어드바이스를 객체화 시켜야 한다.
+	bean 등록 or Service 에노테이션 사용.
+
+ -->
 
 <!-- 
 	AOP 용어
